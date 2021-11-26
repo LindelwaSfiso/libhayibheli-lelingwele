@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Bible Siswati</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Bible Siswati</string>
+    <string name="nav_header_subtitle">sfisolindelwa@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_siswati_reference">Siswati Reference</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="email">sfisolindelwa@gmail.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_testament">New Testament</string>
+    <string name="old_testament">Old Testament</string>
+    <string name="licilongo">Licilongo</string>
+    <string name="notes">Notes</string>
+    <string name="add_to_favorite">Add to Favorites</string>
+    <string name="remove_from_favorites">Remove from Favorites</string>
+    <string name="translation">Translation:</string>
+    <string name="about">About</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="siswati">Siswati</string>
+    <string name="english">English</string>
+    <string name="app_configuration">App Configuration</string>
+    <string name="features">Features</string>
+    <string name="with_niv">|> NIV &amp; Licilongo</string>
+    <string name="favorite_verses">Favorite Verses</string>
+    <string name="clear_favorites">Clear favorites</string>
+    <string name="note_title">Note title</string>
+    <string name="note">Note</string>
+    <string name="developer_dlamini_lindelwa_sifiso">Developer: Dlamini Lindelwa Sifiso</string>
+    <string name="contact_sfisolindelwa_gmail_com_268_7648_0479">Contact :: sfisolindelwa@gmail.com</string>
+    <string name="bible_siswati_v1_0_2">Bible SiSwati v1.0.2</string>
+    <string name="copy_rights">sfisolindelwa@gmail.com</string>
+    <string name="search">Search</string>
+
+</resources>

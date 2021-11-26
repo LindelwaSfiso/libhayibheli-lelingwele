@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.notes.CreateEditNoteFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/LinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginHorizontal="24dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/noteTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/note_title" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/dateCreated"
+                android:paddingVertical="24dp"
+                android:textColor="?android:textColorHint"
+                android:layout_marginStart="24dp"
+                style="?attr/textAppearanceBody2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/app_name" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/noteBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Text"
+                android:background="@null"
+                android:layout_marginHorizontal="24dp"
+                android:hint="@string/note"
+                android:inputType="textMultiLine|textCapSentences"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textAppearance="?attr/textAppearanceBody1" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="15dp"
+        android:contentDescription="@string/app_name"
+        android:tint="@android:color/white"
+        app:tint="@android:color/white"
+        android:src="@drawable/ic_confirm_note" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

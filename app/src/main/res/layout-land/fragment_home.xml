@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/home_old_card_view"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="3dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingBottom="16dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="2dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:padding="24dp"
+                android:text="@string/old_testament"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:typeface="monospace"
+                android:gravity="center_horizontal" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/home_new_card_view"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:padding="24dp"
+                android:text="@string/new_testament"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"
+                android:gravity="center_horizontal" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</RelativeLayout>

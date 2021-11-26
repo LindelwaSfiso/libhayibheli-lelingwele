@@ -1,0 +1,35 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+
+    <string-array name="default_database_entries">
+        <item>NIV</item>
+        <item>Siswati</item>
+    </string-array>
+
+    <string-array name="default_database_values">
+        <item>niv</item>
+        <item>siswati</item>
+    </string-array>
+
+    <string-array name="text_size_entries">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="text_size_values">
+        <item>14</item>
+        <item>18</item>
+        <item>22</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?selectableItemBackground"
+    android:id="@+id/parentContainer">
+
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:orientation="horizontal">
+
+        <TextView
+            android:lines="1"
+            android:text="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/noteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+
+            android:textAppearance="?textAppearanceListItem"
+
+            android:layout_toStartOf="@id/noteDate"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="start|center" />
+
+        <TextView
+            android:paddingEnd="10dp"
+            android:paddingStart="0dp"
+            android:gravity="end|center"
+            android:lines="1"
+            android:text="23/11/11 15:18"
+            android:id="@+id/noteDate"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:text="@string/appbar_scrolling_view_behavior"
+        android:paddingBottom="12dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/noteBody"
+        android:maxLines="3" />
+
+</LinearLayout>

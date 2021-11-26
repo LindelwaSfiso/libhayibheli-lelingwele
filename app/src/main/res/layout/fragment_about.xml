@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".about.AboutFragment"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_marginBottom="?actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_logo"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:textSize="18sp"
+            android:paddingVertical="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bible_siswati_v1_0_2" />
+
+        <TextView
+            android:textSize="18sp"
+            android:paddingVertical="10dp"
+            android:gravity="center"
+            app:fontFamily="@font/type_writer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/developer_dlamini_lindelwa_sifiso" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:listDivider" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_gravity="bottom"
+        android:paddingVertical="10dp"
+        app:fontFamily="@font/type_writer"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/copy_rights"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

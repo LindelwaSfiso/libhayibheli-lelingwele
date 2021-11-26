@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_list_songs"
+            android:icon="@drawable/ic_menu_licilongo"
+            android:title="@string/licilongo" />
+    </group>
+
+    <item android:title="@string/features">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_notes"
+                    android:icon="@drawable/ic_menu_notes"
+                    android:title="@string/notes" />
+                <item
+                    android:id="@+id/nav_siswati_ref"
+                    android:icon="@drawable/ic_menu_siswati_ref"
+                    android:title="@string/menu_siswati_reference" />
+                <item
+                    android:id="@+id/nav_fav_verses"
+                    android:title="@string/favorite_verses"
+                    android:icon="@drawable/ic_menu_favorite" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/app_configuration">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_menu_about"
+                    android:title="@string/about" />
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_menu_settings"
+                    android:title="@string/action_settings" />
+            </group>
+        </menu>
+    </item>
+</menu>

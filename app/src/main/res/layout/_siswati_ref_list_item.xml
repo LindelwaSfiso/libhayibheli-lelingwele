@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:padding="10dp"
+    android:weightSum="1"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?selectableItemBackground"
+    android:id="@+id/parentContainer">
+
+    <TextView
+        style="?textAppearanceListItem"
+        android:id="@+id/book_english"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="0.5"
+        android:text="@string/siswati"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/black" />
+
+    <TextView
+        style="?textAppearanceListItem"
+        android:id="@+id/book_siswati"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="0.5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/english" />
+
+</LinearLayout>

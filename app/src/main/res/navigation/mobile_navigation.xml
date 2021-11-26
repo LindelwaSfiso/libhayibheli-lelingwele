@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="org.xhanka.biblesiswati.ui.main.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_books"
+            app:destination="@id/nav_books" />
+    </fragment>
+
+    <!-- Main Bible Navigation -->
+    <fragment
+        android:id="@+id/nav_books"
+        android:name="org.xhanka.biblesiswati.ui.main.BooksFragment"
+        android:label="Books">
+        <action
+            android:id="@+id/action_nav_books_to_nav_chapters"
+            app:destination="@id/nav_chapters"
+            app:launchSingleTop="true" />
+        <argument
+            android:name="testament"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_chapters"
+        android:name="org.xhanka.biblesiswati.ui.main.ChaptersFragment"
+        android:label="{book_name}"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_chapters_to_nav_verse_details"
+            app:destination="@id/nav_verse_details" />
+        <argument
+            android:name="book_name"
+            app:argType="string"
+            android:defaultValue="genesis" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_verse_details"
+        android:name="org.xhanka.biblesiswati.ui.main.VerseDetailsFragment"
+        android:label="{book_name} : {chapter_num}">
+        <argument
+            android:name="book_name"
+            app:argType="string"
+            android:defaultValue="genesis" />
+        <argument
+            android:name="chapter_num"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_siswati_ref"
+        android:name="org.xhanka.biblesiswati.ui.siswati_reference.SiswatiReferenceFragment"
+        android:label="@string/menu_siswati_reference"
+        tools:layout="@layout/fragment_siswati_reference">
+        <action
+            android:id="@+id/action_siswati_ref_to_chapters"
+            app:destination="@id/nav_chapters" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="org.xhanka.biblesiswati.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="org.xhanka.biblesiswati.settings.SettingsFragment"
+        android:label="@string/action_settings" />
+
+    <fragment
+        android:id="@+id/nav_fav_verses"
+        android:name="org.xhanka.biblesiswati.ui.fav_verses.FavoriteVersesFragment"
+        android:label="@string/favorite_verses"
+        tools:layout="@layout/fragment_favorite_verses" />
+
+
+    <fragment
+        android:id="@+id/nav_list_songs"
+        android:name="org.xhanka.biblesiswati.ui.licilongo.ListSongsFragment"
+        android:label="Licilongo"
+        tools:layout="@layout/fragment_list_songs">
+        <action
+            android:id="@+id/action_list_to_details"
+            app:destination="@id/nav_song_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_song_details"
+        android:name="org.xhanka.biblesiswati.ui.licilongo.SongDetailsFragment"
+        tools:layout="@layout/fragment_song_details"
+        android:label="{song_title}">
+        <argument
+            android:name="song_title"
+            app:argType="string"
+            android:defaultValue="genesis" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_notes"
+        android:name="org.xhanka.biblesiswati.ui.notes.NotesFragment"
+        tools:layout="@layout/fragment_notes"
+        android:label="Notes">
+        <action
+            android:id="@+id/action_nav_notes_to_nav_create_or_edit"
+            app:destination="@id/nav_create_edit_note"
+            app:launchSingleTop="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_create_edit_note"
+        android:name="org.xhanka.biblesiswati.ui.notes.CreateEditNoteFragment"
+        tools:layout="@layout/fragment_create_edit_note"
+        android:label="Create | edit">
+        <action
+            android:id="@+id/action_nav_create_edit_note_to_nav_notes"
+            app:destination="@id/nav_notes"
+            app:popUpTo="@id/nav_notes"
+            app:popUpToInclusive="false"
+            app:popUpToSaveState="false" />
+    </fragment>
+
+
+</navigation>

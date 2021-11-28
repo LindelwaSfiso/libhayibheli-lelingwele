@@ -24,10 +24,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = new Bundle();
         view.findViewById(R.id.home_new_card_view).setOnClickListener(v -> {
-
-            //bundle.putString("book_name", "Genesis");
-            //bundle.putInt("chapter_num", 1);
-            //Navigation.findNavController(view).navigate(R.id.nav_verse_details, bundle);
             bundle.putInt("testament", 0);
             Navigation.findNavController(view).navigate(R.id.action_nav_home_to_nav_books, bundle);
         });

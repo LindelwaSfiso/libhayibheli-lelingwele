@@ -1,7 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="Bible defaults">
+    <PreferenceCategory
+        app:title="Bible defaults"
+        app:iconSpaceReserved="false">
 
         <ListPreference
             android:defaultValue="niv"
@@ -14,7 +16,9 @@
     </PreferenceCategory>
 
 
-    <PreferenceCategory app:title="App Settings">
+    <PreferenceCategory
+        app:title="App Settings"
+        app:iconSpaceReserved="false">
         <ListPreference
             app:icon="@drawable/ic_settings_text_size"
             app:defaultValue="18"

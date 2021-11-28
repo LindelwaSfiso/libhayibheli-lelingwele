@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="defaultTextColor">#808080</color>
+    <color name="backgroundTextColor">#D1D0D0</color>
     <color name="colorFavoriteVerse">#D62513</color>
 </resources>

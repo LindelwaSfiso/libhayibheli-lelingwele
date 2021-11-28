@@ -10,12 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
 
 import org.jetbrains.annotations.NotNull;
 import org.xhanka.biblesiswati.R;
+import org.xhanka.biblesiswati.common.Stagger;
 import org.xhanka.biblesiswati.ui.main.adapter.BooksAdapter;
 import org.xhanka.biblesiswati.ui.main.room.BibleViewModel;
 
@@ -70,8 +73,21 @@ public class BooksFragment extends Fragment {
                 model.getTextSizeValue()
         );
 
-        // todo: remove version option
-        model.getBooksByMode(mode).observe(this, adapter::submitList);
+        recyclerView.setItemAnimator(new DefaultItemAnimator() {
+            @Override
+            public boolean animateAdd(RecyclerView.ViewHolder holder) {
+                dispatchAddFinished(holder);
+                dispatchAddStarting(holder);
+                return false;
+            }
+        });
+
+        Stagger stagger = new Stagger();
+
+        model.getBooksByMode(mode).observe(this, strings -> {
+            TransitionManager.beginDelayedTransition(recyclerView, stagger);
+            adapter.submitList(strings);
+        });
 
         recyclerView.setAdapter(adapter);
         // adapter.submitList(viewModel.getBooksForTestament(mode));

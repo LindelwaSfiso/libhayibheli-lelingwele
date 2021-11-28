@@ -12,9 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
 
 import org.jetbrains.annotations.NotNull;
 import org.xhanka.biblesiswati.R;
+import org.xhanka.biblesiswati.common.Stagger;
 import org.xhanka.biblesiswati.ui.main.adapter.VerseDetailsAdapter;
 import org.xhanka.biblesiswati.ui.main.room.BibleViewModel;
 
@@ -22,6 +24,7 @@ import java.util.Objects;
 
 public class VerseDetailsFragment extends Fragment {
 
+    private final Stagger stagger = new Stagger();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,10 @@ public class VerseDetailsFragment extends Fragment {
         );
 
         recyclerView.setAdapter(adapter);
-        bibleViewModel.getBookVerses(book_name, chapter_num).observe(this, adapter::submitList);
+        bibleViewModel.getBookVerses(book_name, chapter_num).observe(this, verses -> {
+            TransitionManager.beginDelayedTransition(recyclerView, stagger);
+            adapter.submitList(verses);
+        });
 
     }
 }

@@ -37,6 +37,11 @@ class RefAdapter(
         holder.englishName.text = english
         holder.siswatiName.text = siswati
 
+//        if((position + 1) % 2 == 0)
+//            holder.parentContainer.setBackgroundColor(ContextCompat.getColor(
+//                holder.getContext(), R.color.backgroundTextColor)
+//            )
+
         holder.parentContainer.setOnClickListener {
             bundle.putString("book_name", model.getBookName(english, siswati))
             navController.navigate(R.id.action_siswati_ref_to_chapters, bundle)

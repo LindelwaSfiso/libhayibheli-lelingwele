@@ -2,6 +2,7 @@ package org.xhanka.biblesiswati;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -25,28 +26,13 @@ public class MainActivity extends AppCompatActivity {
     int idToLoad;
 
     private AppBarConfiguration mAppBarConfiguration;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // check if first launch
-        /*boolean first_launch = getSharedPreferences(Constants.SHARED_PREF ,MODE_PRIVATE).getBoolean(
-                "first_launch", true
-        );*/
-
-  /*      // if first launch, change variable and run main code
-        if (first_launch) {
-            getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE).edit().putBoolean(
-                    "first_launch", false
-            ).apply();
-
-            new Handler(Looper.getMainLooper()).post(() -> Objects.requireNonNull(new ViewModelProvider(this,
-                    ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())
-            ).get(BibleDataBaseViewModel.class)).getAllBooks());
-        }*/
-
         super.onCreate(savedInstanceState);
 
-        org.xhanka.biblesiswati.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -59,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_notes, R.id.nav_fav_verses, R.id.nav_about, R.id.nav_settings)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
@@ -115,13 +101,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            navController.navigate(R.id.nav_settings);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    void onFirstLaunch() {
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        ///NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 }

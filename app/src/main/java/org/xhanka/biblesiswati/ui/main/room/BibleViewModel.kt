@@ -28,7 +28,7 @@ class BibleViewModel(application: Application) : AndroidViewModel(application) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
         textSize = MutableLiveData(sharedPreferences.getString("text_size", "18")?.toInt())
 
-        val default = sharedPreferences.getString(Constants.SETTINGS_DATABASE, "niv") == "niv"
+        val default = sharedPreferences.getString(Constants.SETTINGS_DATABASE, "siswati") == "niv"
         bibleVersion = if (default) MutableLiveData(NIV) else MutableLiveData(SISWATI)
     }
 

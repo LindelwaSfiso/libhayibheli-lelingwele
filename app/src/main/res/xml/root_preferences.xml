@@ -6,7 +6,7 @@
         app:iconSpaceReserved="false">
 
         <ListPreference
-            android:defaultValue="niv"
+            android:defaultValue="siswati"
             android:entries="@array/default_database_entries"
             android:entryValues="@array/default_database_values"
             app:icon="@drawable/ic_menu_settings"

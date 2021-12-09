@@ -22,13 +22,24 @@
             android:scaleType="fitCenter"
             android:contentDescription="@string/app_name" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:listDivider" />
+
         <TextView
             android:textSize="18sp"
             android:paddingVertical="10dp"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:fontFamily="@font/type_writer"
             android:text="@string/bible_siswati_v1_0_2" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:listDivider" />
 
         <TextView
             android:textSize="18sp"

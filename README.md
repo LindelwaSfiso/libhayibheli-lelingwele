@@ -5,7 +5,7 @@
 An android SISWATI bible with NIV translation. 
 
 ## Installation
-Go to release page and download the latest stable version.
+Go to [release](https://github.com/LindelwaSfiso/libhayibheli-lelingwele/releases) page and download the latest stable version.
 
 ## Features
 - Contains 2 versions, siswati and niv

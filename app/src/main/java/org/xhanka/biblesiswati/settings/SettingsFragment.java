@@ -7,9 +7,11 @@ import android.view.MenuInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import org.jetbrains.annotations.NotNull;
 import org.xhanka.biblesiswati.R;
+import org.xhanka.biblesiswati.common.Utils;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -23,16 +25,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
-        /*SwitchPreferenceCompat preference = findPreference("dark_mode");
-        if (preference != null)
-            preference.setOnPreferenceChangeListener((preference1, newValue) -> {
-                if ((boolean) newValue)
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                else
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        SwitchPreferenceCompat preference = findPreference("dark_mode");
 
+        if (preference != null) {
+            preference.setChecked(Utils.Companion.getDarkMode(getContext()));
+
+            preference.setOnPreferenceChangeListener((preference1, newValue) -> {
+                Utils.Companion.handleDarkMode((boolean) newValue, getContext());
                 return true;
-            });*/
+            });
+        }
     }
 
     @Override

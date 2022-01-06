@@ -7,7 +7,7 @@
         <item name="postSplashScreenTheme">@style/Theme.BibleSiswati</item>
     </style>
 
-    <style name="Theme.BibleSiswati" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.BibleSiswati" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -20,6 +20,7 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
 
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>

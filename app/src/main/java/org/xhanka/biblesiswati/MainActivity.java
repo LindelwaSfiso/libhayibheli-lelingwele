@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
+import org.xhanka.biblesiswati.common.Utils;
 import org.xhanka.biblesiswati.databinding.ActivityMainBinding;
 
 import java.util.Objects;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.Companion.toggleDarkMode(this);
+
         super.onCreate(savedInstanceState);
         SplashScreen.installSplashScreen(this);
 

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/purple_500</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -11,4 +15,8 @@
     <color name="defaultTextColor">#808080</color>
     <color name="backgroundTextColor">#D1D0D0</color>
     <color name="colorFavoriteVerse">#D62513</color>
+
+    <color name="imageBackground">#FFFFFFFF</color>
+    <color name="icon_black">#ff000000</color>
+    <color name="coloredText">@color/colorPrimary</color>
 </resources>

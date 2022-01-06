@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.xhanka.biblesiswati.common.BibleVersion
@@ -14,9 +15,12 @@ import org.xhanka.biblesiswati.common.BibleVersion.SISWATI
 import org.xhanka.biblesiswati.common.Constants
 import org.xhanka.biblesiswati.ui.main.models.Verse
 import org.xhanka.biblesiswati.ui.siswati_reference.RefBook
+import javax.inject.Inject
 
-class BibleViewModel(application: Application) : AndroidViewModel(application) {
-    val dataBase: BibleDataBase = BibleDataBase.getInstance(application)
+@HiltViewModel
+class BibleViewModel @Inject constructor(application: Application, dataBase: BibleDataBase) :
+    AndroidViewModel(application) {
+    // val dataBase: BibleDataBase = BibleDataBase.getInstance(application)
     private var bibleVersion: LiveData<BibleVersion>
 
     private val booksDao = dataBase.booksDao()

@@ -1,70 +1,58 @@
-package org.xhanka.biblesiswati.ui.licilongo;
+package org.xhanka.biblesiswati.ui.licilongo
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Bundle
+import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionManager
+import dagger.hilt.android.AndroidEntryPoint
+import org.xhanka.biblesiswati.R
+import org.xhanka.biblesiswati.common.Stagger
+import org.xhanka.biblesiswati.ui.licilongo.room.Song
+import org.xhanka.biblesiswati.ui.licilongo.room.SongViewModel
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+@AndroidEntryPoint
+class ListSongsFragment : Fragment() {
+    private val songViewModel by viewModels<SongViewModel>()
 
-import org.jetbrains.annotations.NotNull;
-import org.xhanka.biblesiswati.R;
-import org.xhanka.biblesiswati.ui.licilongo.room.SongViewModel;
-
-import java.util.Objects;
-
-
-public class ListSongsFragment extends Fragment {
-
-    SongViewModel model;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         //setHasOptionsMenu(true);
-        model = new ViewModelProvider(
-                this, ViewModelProvider.AndroidViewModelFactory.getInstance(
-                Objects.requireNonNull(getActivity()).getApplication()
-        )).get(SongViewModel.class);
 
-        return inflater.inflate(R.layout.fragment_list_songs, container, false);
+        return inflater.inflate(R.layout.fragment_list_songs, container, false)
     }
 
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(
-                view.getContext(), DividerItemDecoration.VERTICAL));
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                view.context, DividerItemDecoration.VERTICAL
+            )
+        )
+        val adapter = LicilongoAdapter(findNavController(view))
+        recyclerView.adapter = adapter
 
-        LicilongoAdapter adapter = new LicilongoAdapter(Navigation.findNavController(view));
-        recyclerView.setAdapter(adapter);
-
-        model.getSongs().observe(this, adapter::submitList);
+        val stagger = Stagger()
+        songViewModel.songs.observe(this, { songs: List<Song?> ->
+            TransitionManager.beginDelayedTransition(recyclerView, stagger)
+            adapter.submitList(songs)
+        })
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // todo: implement searching
-        //menu.clear();
-        //inflater.inflate(R.menu.menu_licilongo, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+        // menu.clear();
+        // inflater.inflate(R.menu.menu_licilongo, menu);
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

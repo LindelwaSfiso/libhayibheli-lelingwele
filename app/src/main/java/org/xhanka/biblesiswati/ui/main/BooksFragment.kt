@@ -1,148 +1,70 @@
-package org.xhanka.biblesiswati.ui.main;
+package org.xhanka.biblesiswati.ui.main
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionManager
+import dagger.hilt.android.AndroidEntryPoint
+import org.xhanka.biblesiswati.R
+import org.xhanka.biblesiswati.common.Stagger
+import org.xhanka.biblesiswati.ui.main.adapter.BooksAdapter
+import org.xhanka.biblesiswati.ui.main.room.BibleViewModel
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.TransitionManager;
+@AndroidEntryPoint
+class BooksFragment : Fragment() {
 
-import org.jetbrains.annotations.NotNull;
-import org.xhanka.biblesiswati.R;
-import org.xhanka.biblesiswati.common.Stagger;
-import org.xhanka.biblesiswati.ui.main.adapter.BooksAdapter;
-import org.xhanka.biblesiswati.ui.main.room.BibleViewModel;
+    private val bibleViewModel by activityViewModels<BibleViewModel>()
+    private val args by navArgs<BooksFragmentArgs>()
 
-import java.util.Objects;
-
-
-public class BooksFragment extends Fragment {
-
-    public BooksFragment() {
-        // Required empty public constructor
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_books, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+        val mode = args.testament
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        /*viewModel = new ViewModelProvider(this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication())
-        ).get(BibleDataBaseViewModel.class);*/
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                view.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
-        return inflater.inflate(R.layout.fragment_books, container, false);
-    }
+        val adapter = BooksAdapter(
+            findNavController(view),
+            bibleViewModel.getTextSizeValue()
+        )
 
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        int mode = 0;
-        if (getArguments() != null)
-            mode = getArguments().getInt("testament", 0);
-
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(
-                view.getContext(),
-                DividerItemDecoration.VERTICAL)
-        );
-
-        BibleViewModel model = new ViewModelProvider(this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(
-                        Objects.requireNonNull(getActivity()).getApplication())
-        ).get(BibleViewModel.class);
-
-        BooksAdapter adapter = new BooksAdapter(
-                Navigation.findNavController(view),
-                model.getTextSizeValue()
-        );
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator() {
-            @Override
-            public boolean animateAdd(RecyclerView.ViewHolder holder) {
-                dispatchAddFinished(holder);
-                dispatchAddStarting(holder);
-                return false;
-            }
-        });
-
-        Stagger stagger = new Stagger();
-
-        model.getBooksByMode(mode).observe(this, strings -> {
-            TransitionManager.beginDelayedTransition(recyclerView, stagger);
-            adapter.submitList(strings);
-        });
-
-        recyclerView.setAdapter(adapter);
-        // adapter.submitList(viewModel.getBooksForTestament(mode));
-
-/*        recyclerView.setAdapter(new Adapter(
-                viewModel.getBooksForTestament(mode),
-                Navigation.findNavController(view),
-                viewModel.getTextSize()
-        ));*/
-
-    }
-
-   /* static class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-        ArrayList<String> books;
-        NavController navController;
-        Bundle bundle  = new Bundle();
-        int textSize;
-
-        Adapter(ArrayList<String> books, NavController controller, int textSize) {
-            this.books = books;
-            this.navController = controller;
-            this.textSize = textSize;
-        }
-
-        @NonNull
-        @NotNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout._list_item, parent, false),
-                    textSize
-            );
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-            holder.textView.setText(books.get(position));
-            holder.textView.setOnClickListener(v -> {
-                bundle.putString("book_name", books.get(position));
-                navController.navigate(R.id.action_nav_books_to_nav_chapters, bundle);
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return books.size();
-        }
-
-        static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView textView;
-            public ViewHolder(@NonNull @NotNull View itemView, int textSize) {
-                super(itemView);
-                textView = itemView.findViewById(R.id.textView);
-                ExtensionsKt.setTextSizeSp(textView, textSize);
+        recyclerView.itemAnimator = object : DefaultItemAnimator() {
+            override fun animateAdd(holder: RecyclerView.ViewHolder): Boolean {
+                dispatchAddFinished(holder)
+                dispatchAddStarting(holder)
+                return false
             }
         }
-    }*/
+
+        val stagger = Stagger()
+        bibleViewModel.getBooksByMode(mode).observe(this, { strings: List<String?> ->
+            TransitionManager.beginDelayedTransition(recyclerView, stagger)
+            adapter.submitList(strings)
+        })
+
+        recyclerView.adapter = adapter
+    }
 }

@@ -4,20 +4,22 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import org.xhanka.biblesiswati.R
 import org.xhanka.biblesiswati.databinding.FragmentNotesBinding
 import org.xhanka.biblesiswati.ui.notes.adapter.NotesAdapter
 import org.xhanka.biblesiswati.ui.notes.room.NotesViewModel
 
+@AndroidEntryPoint
 class NotesFragment : Fragment() {
     private var fragmentNotesBinding: FragmentNotesBinding? = null
-    private var notesViewModel: NotesViewModel? = null
+    private val notesViewModel by activityViewModels<NotesViewModel>()
     private var notesAdapter: NotesAdapter? = null
 
     override fun onCreateView(
@@ -28,12 +30,12 @@ class NotesFragment : Fragment() {
         setHasOptionsMenu(true)
         fragmentNotesBinding = FragmentNotesBinding.inflate(inflater, container, false)
 
-        notesViewModel = ViewModelProvider(
+/*        notesViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(
                 activity!!.application
             )
-        ).get(NotesViewModel::class.java)
+        ).get(NotesViewModel::class.java)*/
 
         return fragmentNotesBinding?.root
     }
@@ -63,7 +65,7 @@ class NotesFragment : Fragment() {
             }
         })
 
-        notesViewModel?.allNotes?.observe(viewLifecycleOwner) { notes ->
+        notesViewModel.allNotes.observe(viewLifecycleOwner) { notes ->
             notes.let {
                 notesAdapter?.submitList(notes)
                 if (it.isEmpty())
@@ -74,7 +76,8 @@ class NotesFragment : Fragment() {
         }
 
         fragmentNotesBinding?.addNote?.setOnClickListener {
-            findNavController(view).navigate(R.id.action_nav_notes_to_nav_create_or_edit)
+            val action = NotesFragmentDirections.actionNavNotesToNavCreateOrEdit(null)
+            findNavController(view).navigate(action)
         }
 
         ItemTouchHelper(object : ItemTouchHelper.Callback() {
@@ -112,7 +115,7 @@ class NotesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_clear_notes) {
-            notesViewModel?.deleteAllNotes()
+            notesViewModel.deleteAllNotes()
             return true
         }
         return super.onOptionsItemSelected(item)

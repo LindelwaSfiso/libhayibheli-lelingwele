@@ -1,7 +1,6 @@
 package org.xhanka.biblesiswati.ui.licilongo
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,6 @@ import org.xhanka.biblesiswati.ui.licilongo.room.Song
 
 class LicilongoAdapter(private val navController: NavController) :
     ListAdapter<Song, LicilongoAdapter.LicilongoVH>(SONG_COMPARATOR) {
-
-    val bundle = Bundle()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LicilongoVH {
         return LicilongoVH(
@@ -35,10 +32,11 @@ class LicilongoAdapter(private val navController: NavController) :
         holder.textView.text = songTitle
 
         holder.parentContainer.setOnClickListener {
-            bundle.putInt("song_id", position + 1)
-            bundle.putString("song_title", songTitle)
-            bundle.putString("song", song)
-            navController.navigate(R.id.action_list_to_details, bundle)
+            val action = ListSongsFragmentDirections.actionListToDetails( // position + 1,
+                songTitle = songTitle,
+                song = song
+            )
+            navController.navigate(action)
         }
     }
 

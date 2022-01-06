@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.xhanka.biblesiswati.R
+import org.xhanka.biblesiswati.ui.notes.NotesFragmentDirections
 import org.xhanka.biblesiswati.ui.notes.room.Note
 import org.xhanka.biblesiswati.ui.notes.room.NotesViewModel
 
@@ -30,8 +31,8 @@ class NotesAdapter(
 
         holder.bind(note)
         holder.parentContainer.setOnClickListener {
-            bundle.putParcelable("NOTE", getItem(position))
-            navController.navigate(R.id.action_nav_notes_to_nav_create_or_edit, bundle)
+            val action = NotesFragmentDirections.actionNavNotesToNavCreateOrEdit(getItem(position))
+            navController.navigate(action)
         }
 
         holder.parentContainer.setOnLongClickListener { l: View? ->

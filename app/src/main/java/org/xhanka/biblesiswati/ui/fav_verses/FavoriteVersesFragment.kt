@@ -1,91 +1,82 @@
-package org.xhanka.biblesiswati.ui.fav_verses;
+package org.xhanka.biblesiswati.ui.fav_verses
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Bundle
+import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
+import org.xhanka.biblesiswati.R
+import org.xhanka.biblesiswati.databinding.FragmentFavoriteVersesBinding
+import org.xhanka.biblesiswati.ui.main.models.Verse
+import org.xhanka.biblesiswati.ui.main.room.BibleViewModel
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+@AndroidEntryPoint
+class FavoriteVersesFragment : Fragment() {
+    private val bibleViewModel by activityViewModels<BibleViewModel>()
+    private lateinit var binding: FragmentFavoriteVersesBinding
 
-import org.jetbrains.annotations.NotNull;
-import org.xhanka.biblesiswati.R;
-import org.xhanka.biblesiswati.ui.main.room.BibleViewModel;
-
-import java.util.Objects;
-
-public class FavoriteVersesFragment extends Fragment {
-
-    BibleViewModel model;
-
-    public FavoriteVersesFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite_verses, container, false);
+        binding = FragmentFavoriteVersesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setHasOptionsMenu(true);
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL));
-        final NavController nav = Navigation.findNavController(view);
+        val recyclerView: RecyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                view.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
-        model = Objects.requireNonNull(new ViewModelProvider(this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication())
-        ).get(BibleViewModel.class));
+        /*bibleViewModel = Objects.requireNonNull(
+            ViewModelProvider(
+                this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(
+                    Objects.requireNonNull(activity).application
+                )
+            ).get(BibleViewModel::class.java)
+        )*/
 
-        FavoritesAdapter adapter = new FavoritesAdapter(
-                model, nav
-        );
+        val nav = findNavController(view)
+        val adapter = FavoritesAdapter(
+            bibleViewModel, nav
+        )
 
-        recyclerView.setAdapter(adapter);
+        recyclerView.adapter = adapter
 
-        model.getAllFavorites().observe(this, verses -> {
-            adapter.submitList(verses);
+        bibleViewModel.getAllFavorites().observe(this, { verses: List<Verse?> ->
+            adapter.submitList(verses)
             if (verses.isEmpty())
-                view.findViewById(R.id.emptyView).setVisibility(View.VISIBLE);
+                binding.emptyView.visibility = View.VISIBLE
             else
-                view.findViewById(R.id.emptyView).setVisibility(View.INVISIBLE);
-        });
+                binding.emptyView.visibility = View.INVISIBLE
+        })
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.menu_favorites, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_favorites, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-        if (item.getItemId() == R.id.action_clear_favorites) {
-            model.clearAllFavorites();
-            return true;
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_clear_favorites) {
+            bibleViewModel.clearAllFavorites()
+            return true
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item)
     }
 }

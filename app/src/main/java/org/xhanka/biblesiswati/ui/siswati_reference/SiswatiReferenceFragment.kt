@@ -1,64 +1,49 @@
-package org.xhanka.biblesiswati.ui.siswati_reference;
+package org.xhanka.biblesiswati.ui.siswati_reference
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import org.xhanka.biblesiswati.databinding.FragmentSiswatiReferenceBinding
+import org.xhanka.biblesiswati.ui.main.room.BibleViewModel
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+class SiswatiReferenceFragment : Fragment() {
+    private lateinit var binding: FragmentSiswatiReferenceBinding
 
-import org.jetbrains.annotations.NotNull;
-import org.xhanka.biblesiswati.databinding.FragmentSiswatiReferenceBinding;
-import org.xhanka.biblesiswati.ui.main.room.BibleViewModel;
-
-import java.util.Objects;
-
-public class SiswatiReferenceFragment extends Fragment {
-
-    private FragmentSiswatiReferenceBinding binding;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
-        binding = FragmentSiswatiReferenceBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSiswatiReferenceBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        RecyclerView recyclerView = binding.recyclerView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        val recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                view.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
-        BibleViewModel model = Objects.requireNonNull(new ViewModelProvider(this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(Objects.requireNonNull(getActivity()).getApplication())
-        ).get(BibleViewModel.class));
+        val bibleViewModel by activityViewModels<BibleViewModel>()
 
-        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(),
-                DividerItemDecoration.VERTICAL)
-        );
-
-        RefAdapter adapter = new RefAdapter(
-                Navigation.findNavController(view),
-                model
-        );
-        recyclerView.setAdapter(adapter);
-
-        model.getRefBooks().observe(this, adapter::submitList);
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        val adapter = RefAdapter(
+            findNavController(view),
+            bibleViewModel
+        )
+        recyclerView.adapter = adapter
+        bibleViewModel.getRefBooks().observe(this, { list: List<RefBook?> ->
+            adapter.submitList(list)
+        })
     }
 }

@@ -2,7 +2,6 @@ package org.xhanka.biblesiswati.ui.fav_verses
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ class FavoritesAdapter(
     private val model: BibleViewModel,
     private val navController: NavController
 ) : ListAdapter<Verse, FavoritesAdapter.FavoritesVH>(VERSE_COMPARATOR) {
-    var bundle = Bundle()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesVH {
         return FavoritesVH(
@@ -50,9 +48,11 @@ class FavoritesAdapter(
         holder.verseText.text = verseText
 
         holder.parentContainer.setOnClickListener {
-            bundle.putString("book_name", title)
-            bundle.putInt("chapter_num", verse.chapter)
-            navController.navigate(R.id.nav_verse_details, bundle)
+            val action = FavoriteVersesFragmentDirections.actionNavFavVersesToNavVerseDetails(
+                title,
+                chapterNum = verse.chapter
+            )
+            navController.navigate(action)
         }
 
         holder.parentContainer.setOnLongClickListener { l: View? ->

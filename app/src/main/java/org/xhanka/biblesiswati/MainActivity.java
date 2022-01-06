@@ -24,6 +24,9 @@ import org.xhanka.biblesiswati.databinding.ActivityMainBinding;
 
 import java.util.Objects;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
     int idToLoad;
 

@@ -5,19 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
+import dagger.hilt.android.AndroidEntryPoint
 import org.xhanka.biblesiswati.R
 import org.xhanka.biblesiswati.common.Stagger
 import org.xhanka.biblesiswati.ui.main.adapter.ChaptersAdapter
 import org.xhanka.biblesiswati.ui.main.room.BibleViewModel
 import java.util.*
 
+@AndroidEntryPoint
 class ChaptersFragment : Fragment() {
+
+    private val args by navArgs<ChaptersFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +34,7 @@ class ChaptersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(
@@ -37,21 +43,23 @@ class ChaptersFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        val bookName = if (arguments != null)
-            arguments!!.getString("book_name", "Genesis")
-        else "Genesis"
+        val bookName = args.bookName
 
-        val booksViewModel = ViewModelProvider(
+        val booksViewModel by activityViewModels<BibleViewModel>()
+        /*ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(activity!!.application)
-        ).get(BibleViewModel::class.java)
+        ).get(BibleViewModel::class.java)*/
 
-        val adapter =
-            ChaptersAdapter(findNavController(view), bookName, booksViewModel.getTextSizeValue())
+        val adapter = ChaptersAdapter(
+            findNavController(view),
+            bookName,
+            booksViewModel.getTextSizeValue()
+        )
+
         recyclerView.adapter = adapter
 
         val stagger = Stagger()
-
         booksViewModel.getChapterCount(bookName).observe(this, {
             val chapters = ArrayList<String>()
             for (i in 0 until it) chapters.add("Chapter " + (i + 1))

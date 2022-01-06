@@ -1,15 +1,13 @@
 package org.xhanka.biblesiswati.ui.licilongo.room
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Song::class], version = 1, exportSchema = false)
 abstract class SongDataBase : RoomDatabase() {
     abstract fun songDao(): SongDao
 
-    companion object {
+    /*companion object {
         private const val DATABASE_NAME = "licilongo_database.db"
         private const val assetDatabaseName = "databases/licilongo_database.db"
 
@@ -31,5 +29,5 @@ abstract class SongDataBase : RoomDatabase() {
                 .createFromAsset(assetDatabaseName)
                 .build()
         }
-    }
+    }*/
 }

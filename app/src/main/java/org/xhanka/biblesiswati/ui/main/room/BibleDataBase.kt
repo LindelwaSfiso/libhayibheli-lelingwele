@@ -1,8 +1,6 @@
 package org.xhanka.biblesiswati.ui.main.room
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import org.xhanka.biblesiswati.ui.main.models.Book
@@ -14,7 +12,7 @@ abstract class BibleDataBase : RoomDatabase() {
     abstract fun booksDao(): BooksDao
     abstract fun bibleDao(): BibleDao
 
-    companion object {
+    /* companion object {
         private const val DATABASE_NAME = "bible.db"
         private const val assetDatabaseName = "databases/${DATABASE_NAME}"
 
@@ -33,5 +31,5 @@ abstract class BibleDataBase : RoomDatabase() {
                 DATABASE_NAME
             ).createFromAsset(assetDatabaseName).build()
         }
-    }
+    }*/
 }

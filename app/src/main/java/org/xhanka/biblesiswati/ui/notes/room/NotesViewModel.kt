@@ -4,12 +4,17 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NotesViewModel(application: Application) : AndroidViewModel(application) {
-    private val database = NotesDataBase.getDatabase(application)
-    private val noteDao = database.noteDao()
+
+@HiltViewModel
+class NotesViewModel @Inject constructor(application: Application, dataBase: NotesDataBase) :
+    AndroidViewModel(application) {
+    // private val database = NotesDataBase.getDatabase(application)
+    private val noteDao = dataBase.noteDao()
     var allNotes: LiveData<List<Note>> = noteDao.allNotes
 
     fun deleteNote(note: Note?) = viewModelScope.launch(Dispatchers.IO) {

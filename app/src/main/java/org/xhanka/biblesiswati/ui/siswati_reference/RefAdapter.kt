@@ -1,6 +1,5 @@
 package org.xhanka.biblesiswati.ui.siswati_reference
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,6 @@ class RefAdapter(
     private val navController: NavController,
     private val model: BibleViewModel,
 ) : ListAdapter<RefBook, RefAdapter.RefVH>(REF_COMPARATOR) {
-
-    private val bundle = Bundle()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RefVH {
         return RefVH(
@@ -43,8 +40,10 @@ class RefAdapter(
 //            )
 
         holder.parentContainer.setOnClickListener {
-            bundle.putString("book_name", model.getBookName(english, siswati))
-            navController.navigate(R.id.action_siswati_ref_to_chapters, bundle)
+            val action = SiswatiReferenceFragmentDirections.actionSiswatiRefToChapters(
+                model.getBookName(english, siswati)
+            )
+            navController.navigate(action)
         }
     }
 

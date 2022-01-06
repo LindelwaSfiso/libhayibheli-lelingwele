@@ -56,11 +56,16 @@ class VerseDetailsAdapter(
 
         holder.parentContainer.setOnClickListener {
             val details = VerseDetailsBottomFragment.getInstance(verse.id)
-            details.setOnClick { isClicked: Boolean ->
-                verse.setFav(isClicked)
-                if (isClicked) holder.verseText.setTextColor2(R.color.colorFavoriteVerse)
-                else holder.verseText.setTextColor2(R.color.defaultTextColor)
+
+            val click = object : VerseDetailsBottomFragment.OnClick {
+                override fun isClicked(isClicked: Boolean) {
+                    verse.setFav(isClicked)
+                    if (isClicked) holder.verseText.setTextColor2(R.color.colorFavoriteVerse)
+                    else holder.verseText.setTextColor2(R.color.defaultTextColor)
+                }
             }
+            details.setOnClick(click)
+
             details.show(fragmentManager, "DETAIL")
         }
     }

@@ -13,9 +13,6 @@ An android SISWATI bible with NIV translation.
 Go to the [release](https://github.com/LindelwaSfiso/libhayibheli-lelingwele/releases) page and
 download the latest stable version.
 
-## App Preview
-
-![Bible Siswati preview](./art/bible_siswati.gif)
 
 ## Features
 

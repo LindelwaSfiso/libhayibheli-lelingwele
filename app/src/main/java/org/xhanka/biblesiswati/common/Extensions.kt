@@ -19,35 +19,27 @@ fun TextView.setTextColor2(@ColorRes color: Int) {
 
 class Utils {
     companion object {
-        fun handleDarkMode(turnOnDarkMode: Boolean, context: Context?) {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
-            if (turnOnDarkMode && AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                sharedPreferences.edit().putBoolean(Constants.DARK_MODE, true).apply()
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                return
-            }
-
-            // IF CONTEXT IS NOT NULL, HANDLE DARK MODE
-            context.let {
-                if (turnOnDarkMode)
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                else
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-                sharedPreferences.edit().putBoolean(Constants.DARK_MODE, turnOnDarkMode).apply()
+        private fun getDarkMode(context: Context?): String {
+            context?.let {
+                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(it)
+                return sharedPreferences.getString(Constants.DARK_MODE, "0").toString()
+            } ?: run {
+                return "0"
             }
         }
 
-        fun getDarkMode(context: Context?): Boolean {
-            context.let {
-                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-                return sharedPreferences.getBoolean(Constants.DARK_MODE, false)
+        fun setDarkMode(darkMode: String) {
+            when (darkMode) {
+                "0" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                "1" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "2" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
 
         fun toggleDarkMode(context: Context?) {
-            handleDarkMode(getDarkMode(context), context)
+            context?.let {
+                setDarkMode(getDarkMode(it))
+            }
         }
     }
 }

@@ -30,12 +30,15 @@
             app:title="Text Default Size"
             app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreferenceCompat
-            app:title="Dark Mode"
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/theme_entries"
+            android:entryValues="@array/theme_values"
+            app:icon="@drawable/ic_settings_theme"
             app:key="dark_mode"
-            app:defaultValue="false"
-            android:icon="@drawable/ic_settings_theme"
-            app:summary="Toggle dark mode. [NOTE: EXPERIMENTAL!!]" />
+            app:title="Theme"
+            app:useSimpleSummaryProvider="true"
+            app:summary="Toggle dark mode." />
 
     </PreferenceCategory>
 </PreferenceScreen>

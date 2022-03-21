@@ -82,5 +82,5 @@ public class Constants {
         }
     }
 
-    static final String DARK_MODE = "dark_mode";
+    public static final String DARK_MODE = "dark_mode";
 }

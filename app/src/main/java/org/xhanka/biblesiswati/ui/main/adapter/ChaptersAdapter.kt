@@ -8,13 +8,13 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.xhanka.biblesiswati.R
+import org.xhanka.biblesiswati.common.Utils.Companion.STRINGS_COMPARATOR
 import org.xhanka.biblesiswati.common.setTextSizeSp
 import org.xhanka.biblesiswati.ui.main.ChaptersFragmentDirections
-import org.xhanka.biblesiswati.ui.main.adapter.BooksAdapter.Companion.STRINGS_COMPARATOR
 
 class ChaptersAdapter(
-    var navController: NavController,
-    var book_name: String?,
+    private var navController: NavController,
+    private var book_name: String,
     var textSize: Int
 ) : ListAdapter<String, ChaptersAdapter.ChaptersVH>(STRINGS_COMPARATOR) {
 
@@ -31,8 +31,8 @@ class ChaptersAdapter(
         holder.textView.text = getItem(position)
         holder.textView.setOnClickListener {
             val action = ChaptersFragmentDirections.actionNavChaptersToNavVerseDetails(
-                book_name,
-                position + 1
+                bookName = book_name,
+                chapterNum = position + 1
             )
             navController.navigate(action)
         }

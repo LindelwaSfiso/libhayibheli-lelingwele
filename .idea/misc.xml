@@ -3,31 +3,58 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/chip_text_color.xml" value="0.1555" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_confirm_note.xml" value="0.2078125" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_delete_all.xml" value="0.187" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_dummy.xml" value="0.1315" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_empty.xml" value="0.187" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_logo.xml" value="0.1" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_menu_install_extra_versions.xml" value="0.175" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_menu_is_installed.xml" value="0.1395" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_menu_settings.xml" value="0.2078125" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_menu_share.xml" value="0.1375" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_save_verse.xml" value="0.138" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_settings_text_size.xml" value="0.2078125" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_settings_theme.xml" value="0.2078125" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_share.xml" value="0.125" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/ic_splash.xml" value="0.1171875" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/drawable/item_shape_filler.xml" value="1.0" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout-land/fragment_home.xml" value="0.1214859437751004" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout-night/activity_main.xml" value="0.33" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/_fav_verses_list_item.xml" value="0.11543715846994536" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/_install_db_item.xml" value="0.22" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/_licilongo_list_item.xml" value="0.14993169398907105" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/_list_item.xml" value="0.11202185792349727" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/_note_list_item.xml" value="0.120703125" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/_siswati_ref_list_item.xml" value="0.137109375" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/_song_details_line.xml" value="0.112109375" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/_verse_details_list_item.xml" value="0.106640625" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/activity_main.xml" value="0.11407103825136612" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/app_bar_main.xml" value="0.11407103825136612" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/content_main.xml" value="0.11407103825136612" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment__verse_details.xml" value="0.106640625" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_about.xml" value="0.11099726775956284" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_books.xml" value="0.1" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_chapters.xml" value="0.11543715846994536" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_create_edit_note.xml" value="0.11543715846994536" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_favorite_verses.xml" value="0.11543715846994536" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_install_extra_version.xml" value="0.11099726775956284" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_list_songs.xml" value="0.11543715846994536" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_notes.xml" value="0.1" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_search.xml" value="0.11543715846994536" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_siswati_reference.xml" value="0.11543715846994536" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_song_details.xml" value="0.11543715846994536" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_verse_details.xml" value="0.11543715846994536" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/fragment_verse_details_bottom.xml" value="0.103125" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/nav_header_main.xml" value="0.11543715846994536" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/layout/screen_shot.xml" value="0.33" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/menu/activity_main_drawer.xml" value="0.195703125" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/menu/main.xml" value="0.124609375" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/menu/menu_favorites.xml" value="0.120703125" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/menu/menu_licilongo.xml" value="0.137109375" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/menu/menu_notes.xml" value="0.195703125" />
+        <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1415" />
         <entry key="..\:/Android Studio/Bible/BibleSiswati/app/src/main/res/xml/root_preferences.xml" value="0.1" />
       </map>
     </option>

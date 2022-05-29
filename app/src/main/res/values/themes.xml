@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/purple_500</item>
@@ -19,7 +19,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
 
         <!-- Customize your theme here. -->
@@ -33,7 +33,6 @@
     </style>
 
     <style name="Theme.BibleSiswati.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="Theme.BibleSiswati.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Preview" parent="Widget.MaterialComponents.TextView">

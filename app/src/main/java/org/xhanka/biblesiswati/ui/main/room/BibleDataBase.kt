@@ -4,9 +4,14 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import org.xhanka.biblesiswati.ui.main.models.Book
+import org.xhanka.biblesiswati.ui.main.models.InstalledDb
 import org.xhanka.biblesiswati.ui.main.models.Verse
 
-@Database(entities = [Book::class, Verse::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Book::class, Verse::class, InstalledDb::class],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(Converter::class)
 abstract class BibleDataBase : RoomDatabase() {
     abstract fun booksDao(): BooksDao

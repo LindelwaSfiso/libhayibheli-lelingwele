@@ -51,12 +51,16 @@
         <argument
             android:name="book_name"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="genesis" />
+            app:nullable="false"
+            android:defaultValue="Genesis" />
         <argument
             android:name="chapter_num"
             app:argType="integer"
             android:defaultValue="1" />
+        <argument
+            android:name="verse_num"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 
     <fragment
@@ -71,13 +75,13 @@
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="org.xhanka.biblesiswati.about.AboutFragment"
+        android:name="org.xhanka.biblesiswati.ui.about.AboutFragment"
         android:label="@string/about"
         tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="org.xhanka.biblesiswati.settings.SettingsFragment"
+        android:name="org.xhanka.biblesiswati.ui.settings.SettingsFragment"
         android:label="@string/action_settings" />
 
     <fragment
@@ -146,5 +150,10 @@
             app:popUpToSaveState="false" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_install_extra_versions"
+        android:name="org.xhanka.biblesiswati.ui.downloader.InstallExtraVersionFragment"
+        tools:layout="@layout/fragment_install_extra_version"
+        android:label="Install Other Versions" />
 
 </navigation>

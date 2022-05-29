@@ -19,7 +19,6 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:lineSpacingMultiplier="1.4"
-        android:textColor="@color/colorPrimary"
         app:fontFamily="@font/type_writer" />
 
     <TextView
@@ -32,7 +31,6 @@
         android:paddingEnd="10dp"
         android:padding="15dp"
         android:text="@string/app_name"
-        android:background="?selectableItemBackground"
         style="?textAppearanceListItem"
         android:fontFamily="sans-serif-medium"
         app:fontFamily="sans-serif-medium" />

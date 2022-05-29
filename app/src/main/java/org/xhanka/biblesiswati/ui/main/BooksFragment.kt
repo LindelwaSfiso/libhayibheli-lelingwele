@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,19 +50,19 @@ class BooksFragment : Fragment() {
             bibleViewModel.getTextSizeValue()
         )
 
-        recyclerView.itemAnimator = object : DefaultItemAnimator() {
-            override fun animateAdd(holder: RecyclerView.ViewHolder): Boolean {
-                dispatchAddFinished(holder)
-                dispatchAddStarting(holder)
-                return false
-            }
-        }
+//        recyclerView.itemAnimator = object : DefaultItemAnimator() {
+//            override fun animateAdd(holder: RecyclerView.NotesVH): Boolean {
+//                dispatchAddFinished(holder)
+//                dispatchAddStarting(holder)
+//                return false
+//            }
+//        }
 
         val stagger = Stagger()
-        bibleViewModel.getBooksByMode(mode).observe(this, { strings: List<String?> ->
+        bibleViewModel.getBooksByMode(mode).observe(viewLifecycleOwner) { strings: List<String> ->
             TransitionManager.beginDelayedTransition(recyclerView, stagger)
             adapter.submitList(strings)
-        })
+        }
 
         recyclerView.adapter = adapter
     }

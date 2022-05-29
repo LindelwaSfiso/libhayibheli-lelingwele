@@ -10,6 +10,7 @@ class Book(
     @field:ColumnInfo(name = "CHAPTER_COUNT") var chapterCount: Int,
     @field:ColumnInfo(name = "NIV_BOOK") var nivBook: String,
     @field:ColumnInfo(name = "SISWATI_BOOK") var siswatiBook: String,
+    @field:ColumnInfo(name = "ZULU_BOOK") var zuluBook: String
 ) {
     @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = true)

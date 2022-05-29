@@ -17,7 +17,6 @@ import org.xhanka.biblesiswati.R
 import org.xhanka.biblesiswati.common.Stagger
 import org.xhanka.biblesiswati.ui.main.adapter.ChaptersAdapter
 import org.xhanka.biblesiswati.ui.main.room.BibleViewModel
-import java.util.*
 
 @AndroidEntryPoint
 class ChaptersFragment : Fragment() {
@@ -46,10 +45,6 @@ class ChaptersFragment : Fragment() {
         val bookName = args.bookName
 
         val booksViewModel by activityViewModels<BibleViewModel>()
-        /*ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(activity!!.application)
-        ).get(BibleViewModel::class.java)*/
 
         val adapter = ChaptersAdapter(
             findNavController(view),
@@ -60,11 +55,11 @@ class ChaptersFragment : Fragment() {
         recyclerView.adapter = adapter
 
         val stagger = Stagger()
-        booksViewModel.getChapterCount(bookName).observe(this, {
+        booksViewModel.getChapterCount(bookName).observe(viewLifecycleOwner) {
             val chapters = ArrayList<String>()
             for (i in 0 until it) chapters.add("Chapter " + (i + 1))
             TransitionManager.beginDelayedTransition(recyclerView, stagger)
             adapter.submitList(chapters)
-        })
+        }
     }
 }

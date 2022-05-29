@@ -1,15 +1,17 @@
 package org.xhanka.biblesiswati.ui.siswati_reference
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.NavController
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.xhanka.biblesiswati.R
+import org.xhanka.biblesiswati.common.Utils.Companion.REF_COMPARATOR
 import org.xhanka.biblesiswati.ui.main.room.BibleViewModel
 
 class RefAdapter(
@@ -26,42 +28,31 @@ class RefAdapter(
     }
 
     override fun onBindViewHolder(holder: RefVH, position: Int) {
-        val book = getItem(position)
-
-        val english = book.NIV_BOOK
-        val siswati = book.SISWATI_BOOK
-
-        holder.englishName.text = english
-        holder.siswatiName.text = siswati
-
-//        if((position + 1) % 2 == 0)
-//            holder.parentContainer.setBackgroundColor(ContextCompat.getColor(
-//                holder.getContext(), R.color.backgroundTextColor)
-//            )
-
-        holder.parentContainer.setOnClickListener {
-            val action = SiswatiReferenceFragmentDirections.actionSiswatiRefToChapters(
-                model.getBookName(english, siswati)
-            )
-            navController.navigate(action)
-        }
+        holder.onBind(getItem(position), navController, model)
     }
 
 
     class RefVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val parentContainer: LinearLayout = itemView.findViewById(R.id.parentContainer)
-        val englishName: TextView = itemView.findViewById(R.id.book_english)
-        val siswatiName: TextView = itemView.findViewById(R.id.book_siswati)
-    }
+        private val parentContainer: LinearLayout = itemView.findViewById(R.id.parentContainer)
+        private val englishName: TextView = itemView.findViewById(R.id.book_english)
+        private val siswatiName: TextView = itemView.findViewById(R.id.book_siswati)
 
-    companion object {
-        val REF_COMPARATOR = object : DiffUtil.ItemCallback<RefBook>() {
-            override fun areItemsTheSame(oldItem: RefBook, newItem: RefBook): Boolean {
-                return oldItem.NIV_BOOK == newItem.NIV_BOOK
-            }
+        fun onBind(book: RefBook, navController: NavController, model: BibleViewModel) {
+            val (english, siswati, zulu) = book
 
-            override fun areContentsTheSame(oldItem: RefBook, newItem: RefBook): Boolean {
-                return oldItem.NIV_BOOK == newItem.NIV_BOOK
+            englishName.text = english
+            siswatiName.text = siswati
+
+            parentContainer.setOnClickListener {
+                val inputMethodManager = it.context.getSystemService(Context.INPUT_METHOD_SERVICE)
+                        as InputMethodManager
+                if (inputMethodManager.isAcceptingText)
+                    inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
+
+                val action = SiswatiReferenceFragmentDirections.actionSiswatiRefToChapters(
+                    model.getBookName(english, siswati, zulu)
+                )
+                navController.navigate(action)
             }
         }
     }

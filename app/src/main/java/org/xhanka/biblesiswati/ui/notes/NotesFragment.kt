@@ -3,8 +3,11 @@ package org.xhanka.biblesiswati.ui.notes
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -18,7 +21,9 @@ import org.xhanka.biblesiswati.ui.notes.room.NotesViewModel
 
 @AndroidEntryPoint
 class NotesFragment : Fragment() {
-    private var fragmentNotesBinding: FragmentNotesBinding? = null
+    private var _binding: FragmentNotesBinding? = null
+    private val binding get() = _binding!!
+
     private val notesViewModel by activityViewModels<NotesViewModel>()
     private var notesAdapter: NotesAdapter? = null
 
@@ -26,42 +31,33 @@ class NotesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        setHasOptionsMenu(true)
-        fragmentNotesBinding = FragmentNotesBinding.inflate(inflater, container, false)
-
-/*        notesViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(
-                activity!!.application
-            )
-        ).get(NotesViewModel::class.java)*/
-
-        return fragmentNotesBinding?.root
+    ): View {
+        _binding = FragmentNotesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView: RecyclerView? = fragmentNotesBinding?.recyclerView
-        val emptyView: ImageView? = fragmentNotesBinding?.notesImageView
-        recyclerView?.layoutManager = LinearLayoutManager(context)
-        recyclerView?.addItemDecoration(
+        val recyclerView: RecyclerView = binding.recyclerView
+        val emptyView: ImageView = binding.notesImageView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(
             DividerItemDecoration(
                 recyclerView.context,
                 DividerItemDecoration.VERTICAL
             )
         )
 
-        recyclerView?.setHasFixedSize(true)
+        recyclerView.setHasFixedSize(true)
 
         notesAdapter = NotesAdapter(notesViewModel, findNavController(view))
-        recyclerView?.adapter = notesAdapter
+        recyclerView.adapter = notesAdapter
 
         notesAdapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 if (itemCount > 0)
-                    recyclerView?.scrollToPosition(positionStart)
+                    recyclerView.scrollToPosition(positionStart)
             }
         })
 
@@ -69,13 +65,13 @@ class NotesFragment : Fragment() {
             notes.let {
                 notesAdapter?.submitList(notes)
                 if (it.isEmpty())
-                    emptyView?.visibility = View.VISIBLE
+                    emptyView.visibility = View.VISIBLE
                 else
-                    emptyView?.visibility = View.INVISIBLE
+                    emptyView.visibility = View.INVISIBLE
             }
         }
 
-        fragmentNotesBinding?.addNote?.setOnClickListener {
+        binding.addNote.setOnClickListener {
             val action = NotesFragmentDirections.actionNavNotesToNavCreateOrEdit(null)
             findNavController(view).navigate(action)
         }
@@ -99,25 +95,31 @@ class NotesFragment : Fragment() {
             }
         }).attachToRecyclerView(recyclerView)
 
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_notes, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.action_clear_notes) {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Delete All Notes")
+                        .setMessage("Are you sure? This action is not reversible.")
+                        .setPositiveButton("Delete") { _, _ ->
+                            notesViewModel.deleteAllNotes()
+                        }.setNegativeButton("Cancel", null).show()
+                    return true
+                }
+                return false
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        fragmentNotesBinding = null
+        _binding = null
         notesAdapter = null
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.menu_notes, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_clear_notes) {
-            notesViewModel.deleteAllNotes()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

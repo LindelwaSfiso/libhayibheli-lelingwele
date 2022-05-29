@@ -13,7 +13,8 @@
         android:layout_gravity="center"
         android:contentDescription="@string/app_name"
         android:id="@+id/notesImageView"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:tint="@color/colorPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

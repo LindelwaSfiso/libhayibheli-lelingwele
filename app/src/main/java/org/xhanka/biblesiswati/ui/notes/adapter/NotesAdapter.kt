@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.NavController
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.xhanka.biblesiswati.R
+import org.xhanka.biblesiswati.common.Utils.Companion.NOTES_COMPARATOR
 import org.xhanka.biblesiswati.ui.notes.NotesFragmentDirections
 import org.xhanka.biblesiswati.ui.notes.room.Note
 import org.xhanka.biblesiswati.ui.notes.room.NotesViewModel
@@ -19,14 +18,18 @@ import org.xhanka.biblesiswati.ui.notes.room.NotesViewModel
 class NotesAdapter(
     private val model: NotesViewModel?,
     private val navController: NavController
-) : ListAdapter<Note, NotesAdapter.ViewHolder>(NOTES_COMPARATOR) {
+) : ListAdapter<Note, NotesAdapter.NotesVH>(NOTES_COMPARATOR) {
     val bundle = Bundle()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesVH {
+        return NotesVH(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout._note_list_item, parent, false
+            )
+        )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NotesVH, position: Int) {
         val note = getItem(position)
 
         holder.bind(note)
@@ -48,36 +51,16 @@ class NotesAdapter(
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class NotesVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val noteTitle = itemView.findViewById<TextView?>(R.id.noteTitle)
         private val noteBody = itemView.findViewById<TextView?>(R.id.noteBody)
         private val noteDate = itemView.findViewById<TextView?>(R.id.noteDate)
-        val parentContainer: LinearLayout = itemView.findViewById(R.id.parentContainer)
+        val parentContainer: View = itemView.findViewById(R.id.parentContainer)
 
         fun bind(note: Note) {
             noteTitle.text = note.noteTitle
             noteBody.text = note.noteText
             noteDate.text = note.dataAdded
-        }
-
-        companion object {
-            fun create(parent: ViewGroup): ViewHolder {
-                val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout._note_list_item, parent, false)
-                return ViewHolder(view)
-            }
-        }
-    }
-
-    companion object {
-        private val NOTES_COMPARATOR = object : DiffUtil.ItemCallback<Note>() {
-            override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
-                return oldItem == newItem
-            }
         }
     }
 }

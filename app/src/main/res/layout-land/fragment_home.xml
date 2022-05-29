@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentBottom="true"
-    android:orientation="horizontal"
-    android:gravity="bottom">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/titleColor"
+        app:cardCornerRadius="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="7dp"
+        android:id="@+id/currentVersionParent">
+
+        <TextView
+            android:textColor="@color/white"
+            android:text="Selected: NIV"
+            android:id="@+id/currentVersion"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="8dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/home_old_card_view"
+        android:layout_above="@id/home_old_card_view"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_logo"
+        android:id="@+id/imageView" />
+
+    <androidx.cardview.widget.CardView
+        app:layout_constraintEnd_toStartOf="@id/home_new_card_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/home_old_card_view"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="3dp"
-        android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -32,11 +68,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/home_old_card_view"
         android:id="@+id/home_new_card_view"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="2dp"
-        android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground">
@@ -52,4 +90,4 @@
             android:textColor="@android:color/white"
             android:textSize="30sp" />
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

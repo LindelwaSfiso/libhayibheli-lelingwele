@@ -23,11 +23,12 @@ class VerseDetailsFragment : Fragment() {
     private val stagger = Stagger()
     private val args by navArgs<VerseDetailsFragmentArgs>()
 
+    val bibleViewModel by activityViewModels<BibleViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_verse_details, container, false)
     }
 
@@ -35,7 +36,8 @@ class VerseDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = layoutManager
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 view.context,
@@ -45,14 +47,27 @@ class VerseDetailsFragment : Fragment() {
         val bookName = args.bookName
         val chapterNum = args.chapterNum
 
-        val bibleViewModel by activityViewModels<BibleViewModel>()
         val adapter = VerseDetailsAdapter(childFragmentManager, bibleViewModel)
 
+        // use this variable to display staggering animation on recycler view once,
+        // only when the recycler view displays data for the fist time
+        var firstTime = true
+
+        // use this variable to scroll to position if user is from favorites fragment
+        var shouldScroll = (args.verseNum != -1)
+
         recyclerView.adapter = adapter
-        bibleViewModel.getBookVerses(bookName!!, chapterNum)
-            .observe(this, { verses: List<Verse?> ->
-                TransitionManager.beginDelayedTransition(recyclerView, stagger)
+        bibleViewModel.getBookVerses(bookName, chapterNum)
+            .observe(viewLifecycleOwner) { verses: List<Verse?> ->
+                if (firstTime) {
+                    TransitionManager.beginDelayedTransition(recyclerView, stagger)
+                    firstTime = false
+                }
                 adapter.submitList(verses)
-            })
+                if (shouldScroll) {
+                    shouldScroll = false
+                    layoutManager.scrollToPosition(args.verseNum - 1)
+                }
+            }
     }
 }

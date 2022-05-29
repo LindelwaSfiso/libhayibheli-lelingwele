@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/translateParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:lineSpacingMultiplier="1.4"
+            android:paddingVertical="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="@string/translation"
+            android:textColor="@color/titleColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/type_writer"
+            app:layout_constraintBottom_toTopOf="@id/divider1"
+            app:layout_constraintEnd_toStartOf="@id/favToggle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/saveToggle"
+            style="@style/Widget.MaterialComponents.Chip.Action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="5dp"
+            android:gravity="end"
+            android:lineSpacingMultiplier="1.4"
+            app:chipIcon="@drawable/ic_save_verse"
+            app:chipIconVisible="true"
+            app:fontFamily="@font/type_writer"
+            app:iconEndPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/header_title"
+            app:layout_constraintEnd_toStartOf="@id/shareVerse"
+            app:layout_constraintStart_toEndOf="@id/header_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textEndPadding="0dp"
+            app:textStartPadding="0dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/shareVerse"
+            style="@style/Widget.MaterialComponents.Chip.Action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="5dp"
+            android:gravity="end"
+            android:lineSpacingMultiplier="1.4"
+            app:chipIcon="@drawable/ic_menu_share"
+            app:chipIconVisible="true"
+            app:fontFamily="@font/type_writer"
+            app:iconEndPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/header_title"
+            app:layout_constraintEnd_toStartOf="@id/favToggle"
+            app:layout_constraintStart_toEndOf="@id/saveToggle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textEndPadding="0dp"
+            app:textStartPadding="0dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/favToggle"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="5dp"
+            android:gravity="end"
+            android:lineSpacingMultiplier="1.4"
+            app:chipIcon="@drawable/ic_menu_favorite"
+            app:chipIconVisible="true"
+            app:fontFamily="@font/type_writer"
+            app:iconEndPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/header_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/shareVerse"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textEndPadding="0dp"
+            app:textStartPadding="0dp" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/translationText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_title" />
+
+        <TextView
+            android:id="@+id/translationText"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.1"
+            android:padding="10dp"
+            android:text="@string/appbar_scrolling_view_behavior"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif"
+            app:layout_constraintBottom_toTopOf="@+id/translateVersionsGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/translateVersionsGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/translationText"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/nivChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:lineSpacingMultiplier="1.4"
+                android:text="@string/niv"
+                android:textColor="@drawable/chip_text_color"
+                app:checkedIcon="@drawable/ic_menu_is_installed"
+                app:checkedIconEnabled="true"
+                app:checkedIconTint="@color/titleColor"
+                app:chipIconVisible="false"
+                app:fontFamily="@font/type_writer" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/siswatiChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/siswati"
+                android:textAllCaps="true"
+                android:textColor="@drawable/chip_text_color"
+                app:checkedIcon="@drawable/ic_menu_is_installed"
+                app:checkedIconEnabled="true"
+                app:checkedIconTint="@color/titleColor"
+                app:chipIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/kjvChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kjv"
+                android:textColor="@drawable/chip_text_color"
+                app:checkedIcon="@drawable/ic_menu_is_installed"
+                app:checkedIconEnabled="true"
+                app:checkedIconTint="@color/titleColor"
+                app:chipIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/bbeChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bbe"
+                android:textColor="@drawable/chip_text_color"
+                app:checkedIcon="@drawable/ic_menu_is_installed"
+                app:checkedIconEnabled="true"
+                app:checkedIconTint="@color/titleColor"
+                app:chipIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/asvChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/asv"
+                android:textColor="@drawable/chip_text_color"
+                app:checkedIcon="@drawable/ic_menu_is_installed"
+                app:checkedIconEnabled="true"
+                app:checkedIconTint="@color/titleColor"
+                app:chipIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/wbtChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wbt"
+                android:textColor="@drawable/chip_text_color"
+                app:checkedIcon="@drawable/ic_menu_is_installed"
+                app:checkedIconEnabled="true"
+                app:checkedIconTint="@color/titleColor"
+                app:chipIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/yltChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ylt"
+                android:textColor="@drawable/chip_text_color"
+                app:checkedIcon="@drawable/ic_menu_is_installed"
+                app:checkedIconEnabled="true"
+                app:checkedIconTint="@color/titleColor"
+                app:chipIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/zuluChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zulu"
+                android:textColor="@drawable/chip_text_color"
+                app:checkedIcon="@drawable/ic_menu_is_installed"
+                app:checkedIconEnabled="true"
+                app:checkedIconTint="@color/titleColor"
+                app:chipIconVisible="false" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/previewParent"
+        android:visibility="gone">
+
+        <TextView
+            app:layout_constraintBottom_toTopOf="@id/previewImage"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Preview"
+            android:paddingVertical="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/prev" />
+
+        <ImageView
+            app:layout_constraintTop_toBottomOf="@id/prev"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitCenter"
+            android:layout_width="0dp"
+            android:minHeight="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/previewImage"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintBottom_toTopOf="@id/saveButton"
+            android:src="@drawable/ic_logo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:backgroundTint="@color/colorAccent"
+            android:id="@+id/cancelButton"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/previewImage"
+            app:layout_constraintEnd_toStartOf="@id/saveButton"
+            app:cornerRadius="12dp"
+            android:text="cancel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:textColor="@android:color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:id="@+id/saveButton"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cancelButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/previewImage"
+            app:cornerRadius="12dp"
+            android:text="Save" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:visibility="invisible"
+        android:id="@+id/screenShot"
+        layout="@layout/screen_shot" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

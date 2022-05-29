@@ -1,7 +1,9 @@
 package org.xhanka.biblesiswati.ui.notes
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,28 +20,19 @@ import java.util.*
 
 @AndroidEntryPoint
 class CreateEditNoteFragment : Fragment() {
-    private val notesViewModel by activityViewModels<NotesViewModel>()
-    private lateinit var binding: FragmentCreateEditNoteBinding
+    private var _binding: FragmentCreateEditNoteBinding? = null
+    private val binding get() = _binding!!
+
     private var note: Note? = null
     private val args by navArgs<CreateEditNoteFragmentArgs>()
+    private val notesViewModel by activityViewModels<NotesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        setHasOptionsMenu(true)
-
-        /*noteViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(
-                this.activity!!.application
-            )
-        ).get(NotesViewModel::class.java)*/
-
-        binding = FragmentCreateEditNoteBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateEditNoteBinding.inflate(inflater, container, false)
         note = args.note
-
         return binding.root
     }
 
@@ -56,11 +49,6 @@ class CreateEditNoteFragment : Fragment() {
         } ?: run {
             createNewNote(title, body, dateCreated, navController)
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun editNote(
@@ -111,5 +99,10 @@ class CreateEditNoteFragment : Fragment() {
                 navController.navigateUp()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

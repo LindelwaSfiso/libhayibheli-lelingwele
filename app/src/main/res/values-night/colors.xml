@@ -14,9 +14,14 @@
 
     <color name="defaultTextColor">#DDD1D1</color>
     <color name="backgroundTextColor">#D1D0D0</color>
-    <color name="colorFavoriteVerse">#E4B0AB</color>
+    <color name="colorFavoriteVerse">@color/navigationItemColor</color>
 
     <color name="imageBackground">#C5B8B8</color>
     <color name="icon_black">#fff</color>
     <color name="coloredText">#fff</color>
+    <color name="navigationItemColor">#A7B2F7</color>
+
+    <!-- Color used for favorite verse and note title, should be color primary on light mode and
+    white on dark -->
+    <color name="titleColor">@color/navigationItemColor</color>
 </resources>

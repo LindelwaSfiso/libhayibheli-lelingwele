@@ -30,14 +30,14 @@ After download is complete, use the app import the downloaded translation.
 
 ## Features
 
-- [ ] Up-to Android 11 support
-- [ ] Comes prepackaged with two versions, siswati and niv
-- [ ] Licilongo levangeli
-- [ ] Add, edit and save notes
-- [ ] Add verses to favorites
-- [ ] Dark theme
-- [ ] Search functionality
-- [ ] Allow user to download extra versions online *experimental mode*
+- [x] Up-to Android 11 support
+- [x] Comes prepackaged with two versions, siswati and niv
+- [x] Licilongo levangeli
+- [x] Add, edit and save notes
+- [x] Add verses to favorites
+- [x] Dark theme
+- [x] Search functionality
+- [x] Allow user to download extra versions online *experimental mode*
 
 ## License
 

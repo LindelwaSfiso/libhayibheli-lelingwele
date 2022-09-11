@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:backgroundTint="@color/titleColor"
+        android:backgroundTint="@color/colorPrimary"
         app:cardCornerRadius="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

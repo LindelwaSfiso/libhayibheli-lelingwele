@@ -4,22 +4,26 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import org.xhanka.biblesiswati.R
 import org.xhanka.biblesiswati.common.DATA
 import org.xhanka.biblesiswati.common.Utils
 import org.xhanka.biblesiswati.databinding.FragmentInstallExtraVersionBinding
@@ -130,6 +134,44 @@ class InstallExtraVersionFragment : Fragment() {
 
             binding.dummy.text = String.format("Importing ${it.third}..... $percentage %%")
         }
+
+        // key: 1toqrszerghx9ai
+        // secret: k38pmfgbcsc37ue
+        // access token: sl.BO2kwXfpK0k4iY9VHv2vCRuDc_j3YBMlgoS1e2aK6M-jrgVGb_kFz48Z8lsl2N3RNN-YDnzHVxPKd5veTLKhOFWvy6r2A8pxRw7Ssbg13QqQUW1Hhh8VxTCpxe32G5h68AVv918
+
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_install_extra, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                val stepsToInstall = ArrayAdapter<String>(
+                    view.context, R.layout._how_to_install_dialog
+                )
+                stepsToInstall.addAll(
+                    resources.getStringArray(R.array.how_to_install_versions).toList()
+                )
+
+                if (menuItem.itemId == R.id.action_how_to_install) {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("How to install new versions?")
+                        .setAdapter(stepsToInstall, null)
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Download") { _, _ ->
+                            Intent(Intent.ACTION_VIEW).apply {
+                                // todo: replace this with the download url, my github account.
+                                // todo: replace this functionality with secure data storage server
+                                data = Uri.parse(DOWNLOAD_URL)
+                                startActivity(this)
+                            }
+                        }
+                        .show()
+                    return true
+                }
+                return false
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -153,5 +195,9 @@ class InstallExtraVersionFragment : Fragment() {
         requireActivity().unregisterReceiver(progressReceiver)
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        const val DOWNLOAD_URL = "https://github.com/LindelwaSfiso/libhayibheli-lelingwele/releases"
     }
 }

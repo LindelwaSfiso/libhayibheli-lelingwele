@@ -20,6 +20,7 @@
     <color name="icon_black">#ff000000</color>
     <color name="coloredText">@color/colorPrimary</color>
     <color name="navigationItemColor">#C7CBE4</color>
+    <color name="screen_shot_background">#fff</color>
 
     <!-- Color used for favorite verse and note title, should be color primary on light mode and
     white on dark -->

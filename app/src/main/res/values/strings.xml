@@ -3,13 +3,13 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Bible Siswati</string>
-    <string name="nav_header_subtitle">sfisolindelwa@gmail.com</string>
+    <string name="nav_header_subtitle">sfisodummy@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="menu_home">Home</string>
     <string name="menu_siswati_reference">Siswati Reference</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="email">sfisolindelwa@gmail.com</string>
+    <string name="email">sfisodummy@gmail.com</string>
     <string name="new_testament">New Testament</string>
     <string name="old_testament">Old Testament</string>
     <string name="licilongo">Licilongo</string>
@@ -27,10 +27,10 @@
     <string name="clear_favorites">Clear favorites</string>
     <string name="note_title">Note title</string>
     <string name="note">Note</string>
-    <string name="developer_dlamini_lindelwa_sifiso">Developer: Dlamini Lindelwa Sifiso</string>
-    <string name="contact_us">Contact :: sfisolindelwa@gmail.com</string>
-    <string name="bible_siswati_v1_0_2">Bible SiSwati v3.1.0</string>
-    <string name="copy_rights">sfisolindelwa@gmail.com</string>
+    <string name="developer_dlamini_lindelwa_sifiso">Developer: Dlamini Sifiso</string>
+    <string name="contact_us">Contact :: sfisodummy@gmail.com</string>
+    <string name="bible_siswati_version">Bible SiSwati v3.5.0</string>
+    <string name="copy_rights">Contact Us / Donate</string>
     <string name="search">Search</string>
     <string name="clear_notes">Clear Notes</string>
     <string name="extra_features">Extra Features</string>
@@ -42,6 +42,8 @@
     <string name="wbt">WBT</string>
     <string name="ylt">YLT</string>
     <string name="zulu">ZULU</string>
-    <string name="dev_screen_shot">sfisolindelwa@gmail.com 😇</string>
+    <string name="dev_screen_shot">sfisodummy@gmail.com 😇</string>
+    <string name="install_information">How to Install</string>
+    <string name="no_verses_added">No verses added!</string>
 
 </resources>

@@ -17,14 +17,14 @@ class InstallExtraAdapter :
     class ImportDbVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val versionNameTexView: TextView = itemView.findViewById(R.id.versionName)
         private val isInstalledChip: MaterialButton = itemView.findViewById(R.id.isInstalled)
-        private val downloadVersionChip: MaterialButton =
-            itemView.findViewById(R.id.downloadVersion)
+        /*private val downloadVersionChip: MaterialButton =
+            itemView.findViewById(R.id.downloadVersion)*/
 
         fun onBind(installedDb: InstalledDb) {
             versionNameTexView.text = installedDb.versionName
 
             isInstalledChip.isEnabled = (installedDb.isInstalled == 1)
-            downloadVersionChip.isEnabled = installedDb.isInstalled != 1
+            // downloadVersionChip.isEnabled = installedDb.isInstalled != 1
         }
     }
 

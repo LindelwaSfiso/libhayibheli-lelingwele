@@ -14,7 +14,7 @@
         android:contentDescription="@string/app_name"
         android:id="@+id/notesImageView"
         android:visibility="gone"
-        app:tint="@color/colorPrimary" />
+        app:tint="@color/icon_black" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

@@ -45,4 +45,15 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="how_to_install_versions">
+        <item>1. Note that this is currently under  development.</item>
+        <item>2. To install additional versions, follow the bellow steps.</item>
+        <item>3. Press the download button below, it will redirect you to a download page.</item>
+        <item>4. From the page, download the required version file.</item>
+        <item>5. The downloaded file will be in .json format.</item>
+        <item>6. After you have downloaded the file, click the import button, and select the downloaded file.</item>
+        <item>7. Importing may take a while, and the app may not be usable while importing.</item>
+        <item>8. Wait until importing is done. Then restart the app, your new version will be installed.</item>
+    </string-array>
+
 </resources>

@@ -168,7 +168,7 @@ class Utils {
         const val SETTINGS_DARK_MODE = "dark_mode"
         const val SETTINGS_BIBLE_VERSION = "database"
         const val SETTINGS_TEXT_SIZE = "text_size"
-        const val CONTACT_US_EMAIL = "sfisolindelwa@gmail.com"
+        const val CONTACT_US_EMAIL = "sfisodummy@gmail.com"
         const val EMAIL_SUBJECT = "Bible Siswati App: Feedback"
 
         val STRINGS_COMPARATOR = object : DiffUtil.ItemCallback<String>() {

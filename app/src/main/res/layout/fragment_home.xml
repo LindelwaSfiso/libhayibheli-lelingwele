@@ -7,7 +7,7 @@
     tools:context=".ui.main.HomeFragment">
 
     <androidx.cardview.widget.CardView
-        android:backgroundTint="@color/titleColor"
+        android:backgroundTint="@color/colorPrimary"
         app:cardCornerRadius="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +36,7 @@
         app:layout_constraintBottom_toTopOf="@id/home_old_card_view"
         android:layout_above="@id/home_old_card_view"
         android:scaleType="fitCenter"
+        android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="@string/app_name"

@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingVertical="10dp"
-        android:text="@string/bible_siswati_v1_0_2"
+        android:text="@string/bible_siswati_version"
         android:textSize="18sp"
         app:fontFamily="@font/type_writer" />
 

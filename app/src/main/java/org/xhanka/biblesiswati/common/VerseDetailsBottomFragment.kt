@@ -1,5 +1,7 @@
 package org.xhanka.biblesiswati.common
 
+import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -13,6 +15,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import org.xhanka.biblesiswati.R
 import org.xhanka.biblesiswati.databinding.FragmentVerseDetailsBottomBinding
@@ -23,7 +27,7 @@ import org.xhanka.biblesiswati.ui.main.room.BibleViewModel
 /**
  * @author Dlamini Lindelwa Sifiso [23-May-22]
  */
-class VerseDetailsBottomFragment : BaseBottomRoundView() {
+class VerseDetailsBottomFragment : BottomSheetDialogFragment() {
     private val model by activityViewModels<BibleViewModel>()
     private lateinit var verse: Verse
     private lateinit var bibleVersion: BibleVersion
@@ -99,11 +103,15 @@ class VerseDetailsBottomFragment : BaseBottomRoundView() {
             configureDefaultTranslation()
 
             binding.shareVerse.setOnClickListener { chipView ->
+                val shareText = "${versionInfo.second.trimIndent()} " +
+                        "${verse.chapter}:${verse.verseNum}" + "\n" +
+                        binding.translationText.text.toString() + " -- ${versionInfo.first}\n\n" +
+                        "Like Our FaceBook Page: Siswati Bible"
                 chipView.context.startActivity(
                     Intent.createChooser(
                         Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
-                            putExtra(Intent.EXTRA_TEXT, binding.translationText.text.toString())
+                            putExtra(Intent.EXTRA_TEXT, shareText)
                         },
                         "Share Verse",
                     )
@@ -142,7 +150,7 @@ class VerseDetailsBottomFragment : BaseBottomRoundView() {
             binding.favToggle.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
                 if (isChecked) {
                     binding.favToggle.isChecked = true
-                    binding.favToggle.setChipIconTintResource(android.R.color.holo_red_light)
+                    binding.favToggle.setChipIconTintResource(android.R.color.holo_red_dark)
                     model.addToFavorites(it.id)
                 } else {
                     binding.favToggle.isChecked = false
@@ -248,6 +256,17 @@ class VerseDetailsBottomFragment : BaseBottomRoundView() {
             instance.arguments = bundle
             return instance
         }
+    }
+
+    override fun getTheme(): Int {
+        return R.style.BottomSheetDialog
+    }
+
+    @SuppressLint("RestrictedApi", "VisibleForTests")
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val bottomSheetDialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+        bottomSheetDialog.behavior.disableShapeAnimations()
+        return bottomSheetDialog
     }
 
     override fun onDestroy() {

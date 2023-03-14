@@ -1,0 +1,9 @@
+workflows:
+    android-workflow:
+        name: Bible Codemagic Workflow
+        max_build_duration: 120
+        instance_type: mac_mini_m1
+        
+        environment:
+        android_signing:
+          - bible

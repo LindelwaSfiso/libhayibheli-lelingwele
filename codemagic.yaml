@@ -5,5 +5,5 @@ workflows:
         instance_type: mac_mini_m1
         
         environment:
-        android_signing:
-          - bible
+            android_signing:
+                - bible

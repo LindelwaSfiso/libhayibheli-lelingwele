@@ -7,22 +7,21 @@ workflows:
         environment:
             android_signing:
                 - bible
-              
 
-scripts:
-    # ....
-  - name: Set Android SDK location
-    script: | 
-      echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
-  - name: Build Android release
-    script: | 
-      ./gradlew bundleRelease # -> to create the .aab
-  - name: Build Android App
-    script: |
-      ./gradlew assembleRelease # -> to create the .apk
+    scripts:
+        # ....
+      - name: Set Android SDK location
+        script: | 
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
+      - name: Build Android release
+        script: | 
+          ./gradlew bundleRelease # -> to create the .aab
+      - name: Build Android App
+        script: |
+          ./gradlew assembleRelease # -> to create the .apk
 
-artifacts:
-  - app/build/outputs/**/*.aab
-  - app/build/outputs/**/*.apk
+    artifacts:
+      - app/build/outputs/**/*.aab
+      - app/build/outputs/**/*.apk
 
 
